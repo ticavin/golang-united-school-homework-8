@@ -128,7 +128,7 @@ func remove(fileName string, id string, writer io.Writer) error {
 	}
 
 	file.Close()
-	writer.Write([]byte(fmt.Sprintf("not found" + id)))
+	writer.Write([]byte(fmt.Sprintf("Item with id %s not found", id)))
 
 	return nil
 }
@@ -156,7 +156,7 @@ func add(fileName string, strItem string, writer io.Writer) error {
 	for _, i := range items {
 		if fmt.Sprint(item.Id) == i.Id {
 
-			writer.Write([]byte(fmt.Sprintf("already exists" + i.Id)))
+			writer.Write([]byte(fmt.Sprintf("Item with id %s already exists", i.Id)))
 			file.Close()
 			return nil
 		}
@@ -240,6 +240,7 @@ func Perform(args Arguments, writer io.Writer) error {
 			return fmt.Errorf(err.Error())
 		}
 	default:
+
 		return fmt.Errorf("Operation %s not allowed!", operation)
 	}
 
